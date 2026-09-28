@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PostgreSQL local / dump files
+*.dump
+*.backup
+*.sql.gz
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test / coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
