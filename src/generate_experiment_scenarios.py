@@ -60,7 +60,7 @@ OUTPUT_DIR = Path(__file__).resolve().parent
 
 SCENARIOS = {
     # ========================================================
-    # EXPERIMENT 1 — CLEAR WINNER
+    # EXPERIMENT 1 ΓÇö CLEAR WINNER
     # ========================================================
     1: {
         "name": "Clear winner",
@@ -87,7 +87,7 @@ SCENARIOS = {
 
 
     # ========================================================
-    # EXPERIMENT 2 — INCONCLUSIVE / UNDERPOWERED
+    # EXPERIMENT 2 ΓÇö INCONCLUSIVE / UNDERPOWERED
     # ========================================================
     2: {
         "name": "Inconclusive / underpowered",
@@ -110,7 +110,7 @@ SCENARIOS = {
 
 
    # ========================================================
-    # EXPERIMENT 3 — SEGMENT SIGNAL
+    # EXPERIMENT 3 ΓÇö SEGMENT SIGNAL
     # ========================================================
     3: {
         "name": "Segment signal",
@@ -131,7 +131,7 @@ SCENARIOS = {
         #
         # Therefore Desktop should have approximately:
         #
-        #     Treatment ≈ Control
+        #     Treatment Γëê Control
         #
         # This isolates the experiment effect to Mobile.
         # ----------------------------------------------------
@@ -174,7 +174,7 @@ SCENARIOS = {
 
 
     # ========================================================
-    # EXPERIMENT 4 — GUARDRAIL VIOLATION
+    # EXPERIMENT 4 ΓÇö GUARDRAIL VIOLATION
     # ========================================================
     4: {
         "name": "Guardrail violation",
@@ -774,7 +774,7 @@ def generate_results(
             )
 
         # ====================================================
-        # EXPERIMENT 3 — SEGMENT-SPECIFIC INTERVENTION
+        # EXPERIMENT 3 ΓÇö SEGMENT-SPECIFIC INTERVENTION
         # ====================================================
 
         if experiment_id == 3:
@@ -1319,26 +1319,27 @@ def generate_business_events(
         events
     )
 
-    events_df.insert(
-        0,
-        "event_id",
-        range(
-            1,
-            len(events_df) + 1,
-        ),
-    )
-
-    search_times = reformulations[
-        [
-            "search_id",
-            "search_timestamp",
+    # Add timestamps BEFORE assigning event IDs.
+    # The timestamp lookup is one row per search, and event IDs are
+    # assigned only after the final event row set is constructed.
+    search_times = (
+        reformulations[
+            [
+                "search_id",
+                "search_timestamp",
+            ]
         ]
-    ]
+        .drop_duplicates(
+            subset=["search_id"],
+            keep="first",
+        )
+    )
 
     events_df = events_df.merge(
         search_times,
         on="search_id",
         how="left",
+        validate="many_to_one",
     )
 
     events_df.rename(
@@ -1347,6 +1348,15 @@ def generate_business_events(
                 "event_timestamp"
         },
         inplace=True,
+    )
+
+    events_df.insert(
+        0,
+        "event_id",
+        range(
+            1,
+            len(events_df) + 1,
+        ),
     )
 
     return events_df[
@@ -1708,6 +1718,15 @@ def main() -> None:
     events_final = pd.concat(
         all_events,
         ignore_index=True,
+    )
+
+    # Event IDs are unique only within each experiment while the
+    # individual event DataFrames are being generated. After combining
+    # all four experiments, assign one GLOBAL event_id sequence.
+    # This guarantees uniqueness across the final business_events table.
+    events_final["event_id"] = range(
+        1,
+        len(events_final) + 1,
     )
 
     # ========================================================
