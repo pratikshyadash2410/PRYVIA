@@ -110,10 +110,10 @@ python -m venv .venv
 pip install -r requirements.txt
 streamlit run app/app.py
 
-Key Skills
+## **Key Skills** 
 
 Product Analytics · A/B Testing · SQL · Python · PostgreSQL · Statistics · Streamlit · Power BI
 
-Author
+## Author
 
 Pratikshya Dash
