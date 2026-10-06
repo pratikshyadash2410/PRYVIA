@@ -76,7 +76,6 @@ Four simulated experiment scenarios demonstrate clear improvement, an underpower
 
 ## **Architecture**
 
-```text
 Python Simulation
        ↓
 PostgreSQL
@@ -91,24 +90,41 @@ Streamlit
        ↓
 Power BI
 
+## Repository Structure
+
 PRYVIA/
-├── app/
-├── docs/
-├── powerbi/
-├── sql/
-├── src/
+├── app/           # Streamlit decision engine UI
+├── docs/          # methodology, decision framework, data dictionary
+├── powerbi/       # screenshots
+├── sql/           # schema, indexes, views, analysis
+├── src/           # generators, statistical analysis, decision engine
 ├── tests/
 ├── requirements.txt
 └── README.md
 
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+
+## Quick Start
+
+git clone https://github.com/pratikshyadash2410/PRYVIA.git
 cd PRYVIA
 
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
 
 pip install -r requirements.txt
 streamlit run app/app.py
+
+## Power BI Dashboard
+
+Page	Focus
+01 — Experiment Portfolio	Verdicts, SSR lift, p-values, guardrails
+02 — Core Metrics	Control vs Treatment SSR, error rate, latency
+03 — Segmentation	Device, activity level, query category (exploratory)
+
+## Limitations
+
+PRYVIA uses synthetic data; results do not represent real production traffic. Scenario effects are intentionally constructed to exercise different decision outcomes. Segment findings are exploratory and not causal.
 
 ## **Key Skills** 
 
