@@ -77,6 +77,7 @@ Four simulated experiment scenarios demonstrate clear improvement, an underpower
 
 ## **Architecture**
 
+```text
 Python Simulation
        ↓
 PostgreSQL
@@ -90,19 +91,21 @@ Decision Engine
 Streamlit
        ↓
 Power BI
+```
 
 ## Repository Structure
 
+```text
 PRYVIA/
 ├── app/           # Streamlit decision engine UI
-├── docs/          # methodology, decision framework, data dictionary
-├── powerbi/       # screenshots
-├── sql/           # schema, indexes, views, analysis
-├── src/           # generators, statistical analysis, decision engine
-├── tests/
+├── docs/          # Methodology, decision framework, data dictionary
+├── powerbi/       # Dashboard files & screenshots
+├── sql/           # Schema, indexes, views, analysis
+├── src/           # Generators, statistical analysis, decision engine
+├── tests/         # Unit & regression test suite
 ├── requirements.txt
 └── README.md
-
+```
 
 ## Quick Start
 
