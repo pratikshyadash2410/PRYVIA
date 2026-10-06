@@ -2,7 +2,7 @@
 
 ### Search-Ranking A/B Experimentation & Decision Engine
 
-PRYVIA is a simulated product-analytics platform for evaluating search-ranking A/B tests using **Successful Search Rate (SSR)**, statistical inference, guardrails, and an explainable decision engine.
+PRYVIA is a simulated product analytics platform for evaluating search ranking A/B tests using **Successful Search Rate (SSR)**, statistical inference, guardrails and an explainable decision engine.
 
 **Stack:** Python · PostgreSQL · SQL · Streamlit · Power BI
 
@@ -12,9 +12,9 @@ PRYVIA is a simulated product-analytics platform for evaluating search-ranking A
 
 - Simulates realistic user search behavior
 - Measures **Successful Search Rate (SSR)** beyond CTR
-- Performs user-level A/B experiment analysis
-- Checks SRM, statistical significance, confidence intervals, and power
-- Evaluates latency and error-rate guardrails
+- Performs user level A/B experiment analysis
+- Checks SRM, statistical significance, confidence intervals and power
+- Evaluates latency and error rate guardrails
 - Produces deterministic experiment decisions
 
 ### **SSR**
@@ -31,15 +31,16 @@ Reformulation: the same user performs another search within **300 seconds** in t
 
 ## **Experiment Design**
 
-- User-level sticky assignment
-- 50/50 Control vs Treatment
-- Baseline SSR: 65%
-- MDE: ±5 percentage points
-- Power: 80%
-- α = 0.05
-- Planned sample: ~2,752 users
+| Parameter       | Value                                          |
+|-----------------|------------------------------------------------|
+| Assignment      | User-level, sticky, 50/50 Control vs Treatment |
+| Baseline SSR    | 65%                                            |
+| MDE             | ±5 percentage points                           |
+| Target power    | 80%                                            |
+| Significance    | α = 0.05                                       |
+| Required sample | ≈2,752 users                                   |
 
-Statistical inference is performed at the **user level** because users can generate multiple searches.
+Inference is performed at the **user level**, since a single user can generate multiple searches and those observations are not independent.
 
 ---
 
@@ -105,22 +106,25 @@ PRYVIA/
 
 ## Quick Start
 
+Clone the repository:
+
+```bash
 git clone https://github.com/pratikshyadash2410/PRYVIA.git
 cd PRYVIA
-
 python -m venv .venv
-.venv\Scripts\activate          # Windows
-# source .venv/bin/activate     # macOS / Linux
-
+.venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
 streamlit run app/app.py
+```
 
-## Power BI Dashboard
+## **Power BI Dashboard**
 
-Page	Focus
-01 — Experiment Portfolio	Verdicts, SSR lift, p-values, guardrails
-02 — Core Metrics	Control vs Treatment SSR, error rate, latency
-03 — Segmentation	Device, activity level, query category (exploratory)
+| Page | Focus |
+|---|---|
+| **01 — Experiment Portfolio** | Verdicts, SSR lift, p-values, and guardrails |
+| **02 — Core Metrics** | Control vs Treatment SSR, error rate, and latency |
+| **03 — Segmentation** | Device, activity level, and query category (exploratory) |
 
 ## Limitations
 
